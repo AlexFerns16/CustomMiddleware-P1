@@ -48,11 +48,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blog.middlewares.simple_middleware',
-    'blog.middlewares.SimpleMiddleware',
-    'blog.middlewares.FirstMiddleware',
-    'blog.middlewares.SecondMiddleware',
-    'blog.middlewares.ThirdMiddleware',
+    # 'blog.middlewares.simple_middleware',
+    # 'blog.middlewares.SimpleMiddleware',
+    # 'blog.middlewares.FirstMiddleware',
+    # 'blog.middlewares.SecondMiddleware',
+    # 'blog.middlewares.ThirdMiddleware',
+    # 'blog.middlewares.MyProcessMiddleware',
+    # 'blog.middlewares.MyProcessExceptionMiddleware',
+    'blog.middlewares.MyProcessTemplateResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'custom_middleware.urls'

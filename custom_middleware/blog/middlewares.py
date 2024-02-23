@@ -60,3 +60,53 @@ class ThirdMiddleware:
         response = self.get_response(request)
         print('This is after View Class ThirdMiddleware')
         return response
+
+
+class MyProcessMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+    
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
+    # if the 'process_view' returns an 'HttpResponse'
+    # then the 'View' will not be called
+    # if the 'process_view' returns 'None'
+    # then the 'View' will be called
+    def process_view(request, *args, **kwargs):
+        print('This is the Process View - before View')
+        # return HttpResponse('This is before view')
+        return None
+
+
+class MyProcessExceptionMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+    
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
+    # goes to work when an exception is encountered in 'View'
+    def process_exception(self, request, exception):
+        print('Exception Occured')
+        message = exception
+        class_name = exception.__class__.__name__
+        print(class_name)
+        return HttpResponse(message)
+
+
+class MyProcessTemplateResponseMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+    
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
+    # changes the 'context' value in 'View'
+    def process_template_response(self, request, response):
+        print('Process Template Response from Middleware')
+        response.context_data['course'] = 'python'
+        return response
